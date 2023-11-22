@@ -89,15 +89,17 @@ function App() {
                 "def": "",
             }
         ]);
-        const [userChoice, setUserChoice] = useState("");
-        const [wrongWords, setWrongWords] = useState([]);
+        // const [userChoice, setUserChoice] = useState("");
+        // const [wrongWords, setWrongWords] = useState([]);
 
         function selectWord() {
             let randomWord =  words[Math.floor(Math.random() * words.length)];
             console.log(randomWord);
-            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_MW_API_KEY}`)
+            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=d083e0a0-8233-44b7-9989-11db737afbd4`)
             .then(res => {
-                let def =res.data[0].def[0].sseq[0][0][1].dt[0][1]; // shortdef
+                // let def =res.data[0].def[0].sseq[0][0][1].dt[0][1]; // shortdef
+                let def = res.data[0].shortdef[0];
+                // const defResult = def.replace(/{bc}|{it}|a_link|d_link|sx/gi, "").replace(/[^a-zA-Z0-9(*), ]/gi, "");
                 console.log(def);
             })
         };
