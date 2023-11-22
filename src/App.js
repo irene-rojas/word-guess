@@ -87,7 +87,7 @@ function App() {
 
         // API call
         function getWordDef() {
-            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=d083e0a0-8233-44b7-9989-11db737afbd4`)
+            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.REACT_APP_API_KEY_MW}`)
             .then(res => {
                 // console.log(res.data[0].shortdef[0]);
                 setWordDef(res.data[0].shortdef[0]);
