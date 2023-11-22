@@ -3,7 +3,7 @@ body {
 }
 
 /* mobile */
-.App {
+/* .App {
     margin: 0 auto;
     display: grid;
     grid-template-columns: 50px 1fr 50px;
@@ -11,45 +11,19 @@ body {
     grid-row-gap: 40px;
     text-align: center;
     height: 100vh;
-}
+} */
 
 h1 {
     margin: 0px;
 }
 
-h4 {
+/* h4 {
     margin-top: 10px;
     margin-bottom: 0px;
     font-weight: normal;
     padding-bottom: 5px;
-}
+} */
 
-.header {
-    grid-column: 2/3;
-    grid-row: 1/2;
-    background-color: white;
-    border-radius: 10px;
-    margin-top: 80px;
-    align-self: center;
-    padding: 10px;
-}
-
-.form {
-    grid-column: 2/3;
-    grid-row: 3/4;
-    background-color: white;
-    border-radius: 10px;
-    padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto repeat(4, 30px);
-}
-
-.def {
-    grid-column: 1/-1;
-    grid-row: 1/2;
-    padding-bottom: 10px;
-}
 
 #wordText {
     grid-column: 1/-1;
@@ -114,24 +88,24 @@ h4 {
 
 
 /* desktop */
-@media (min-width: 1025px) {
+@media (min-width: 769px) {
 
     .App {
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 300px 1fr 300px;
         grid-template-rows: 165px repeat(4, 1fr) 50px;
-        grid-row-gap: 40px;
+        grid-template-columns: 200px 1fr 200px;
+        /* grid-row-gap: 40px; */
         text-align: center;
         height: 100vh;
     }
 
     .header {
-        grid-column: 2/3;
         grid-row: 1/2;
+        grid-column: 2/3;
         background-color: white;
         border-radius: 10px;
-        margin-top: 80px;
+        /* margin-top: 80px; */
         align-self: center;
         padding: 10px;
     }
@@ -147,19 +121,23 @@ h4 {
         /* padding-bottom: 10px; */
     }
 
-    .form {
+    /* .form {
         grid-column: 2/3;
         grid-row: 2/3;
         padding: 10px 30px 10px 30px;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto repeat(4, auto);
-    }
+    } */
 
-    .def {
-        grid-column: 1/-1;
-        grid-row: 1/2;
+    .gameDiv {
+        grid-column: 2/3;
+        grid-row: 2/3;
         padding-bottom: 10px;
+        background-color: white;
+        border-radius: 10px;
+        /* align-self: center; */
+        padding: 10px;
     }
 
     #wordText {
