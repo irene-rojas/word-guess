@@ -100,9 +100,9 @@ function App() {
         }, []);
         // [] tells it to run just once
 
-        console.log(word);
-        console.log(wordDef);
+        console.log(`Word: ${word}. Def: ${wordDef}`);
 
+        
     return (
         <p>{word}</p>
     );
