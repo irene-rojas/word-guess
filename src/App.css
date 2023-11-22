@@ -131,13 +131,22 @@ h1 {
     } */
 
     .gameDiv {
-        grid-column: 2/3;
         grid-row: 2/3;
+        grid-column: 2/3;
         padding-bottom: 10px;
         background-color: white;
         border-radius: 10px;
-        /* align-self: center; */
         padding: 10px;
+        /* align-self: center; */
+    }
+
+    .resultsDiv {
+        grid-row: 3/4;
+        grid-column: 2/3;
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+        align-self: center;
     }
 
     #wordText {
