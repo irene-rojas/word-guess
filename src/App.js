@@ -104,7 +104,31 @@ function App() {
 
         
     return (
-        <p>{word}</p>
+
+        <div className="App">
+
+        <div className="header">
+            <h1>What Does It Mean?</h1>
+            <p>Match the word to the definition.<br />
+            Sometimes it's an obsolute usage!</p>
+        </div>
+
+        <div className='gameDiv'>
+
+            <div className='definition'>
+                <p>Definition:<br />
+                {wordDef}</p>
+            </div>
+            
+            <hr />
+
+            <div className='wordChoices'>
+
+            </div>
+
+        </div>
+
+    </div>
     );
 
     }
