@@ -128,6 +128,10 @@ function App() {
 
         </div>
 
+        <div className='resultsDiv'>
+            <p>Results will go here.</p>
+        </div>
+
     </div>
     );
 
