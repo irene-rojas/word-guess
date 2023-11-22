@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import Right from "./Right/Right";
-import Wrong from "./Wrong/Wrong";
-import mwLogo from "./mwlogo.png";
-import { CALL } from 'eslint-utils';
-
+// import Right from "./Right/Right";
+// import Wrong from "./Wrong/Wrong";
+// import mwLogo from "./mwlogo.png";
 
 
 function App() {
@@ -82,41 +80,36 @@ function App() {
     ];
     // words that reach shortdef endpoint without error
 
-        const [rightWord, setRightWord] = useState([
-            {
-                "word": "",
-                "id": "",
-                "def": "",
-            }
-        ]);
+        const [word, setWord] = useState("");
+        const [wordDef, setWordDef] = useState("");
         // const [userChoice, setUserChoice] = useState("");
         // const [wrongWords, setWrongWords] = useState([]);
 
         function selectWord() {
-            let randomWord =  words[Math.floor(Math.random() * words.length)];
-            console.log(randomWord);
-            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=d083e0a0-8233-44b7-9989-11db737afbd4`)
-            .then(res => {
-                // let def =res.data[0].def[0].sseq[0][0][1].dt[0][1]; // shortdef
-                let def = res.data[0].shortdef[0];
-                // const defResult = def.replace(/{bc}|{it}|a_link|d_link|sx/gi, "").replace(/[^a-zA-Z0-9(*), ]/gi, "");
-                console.log(def);
-            })
+            setWord(words[Math.floor(Math.random() * words.length)].word);
         };
 
-        // 1. onLoad, app selects random word as right choice and puts in state
         // API call
+        function getWordDef() {
+            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=d083e0a0-8233-44b7-9989-11db737afbd4`)
+            .then(res => {
+                // console.log(res.data[0].shortdef);
+                setWordDef(res.data[0].shortdef);
+            });
+        };
+
+        // onLoad
         useEffect(() => {
-
             selectWord();
-
-
+            getWordDef();
         }, []);
         // [] tells it to run just once
 
+        console.log(word);
+        console.log(wordDef);
 
     return (
-        <p>Hello</p>
+        <p>{word}</p>
     );
 
     }
