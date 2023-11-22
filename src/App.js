@@ -82,6 +82,7 @@ function App() {
 
         const [word] = useState(words[Math.floor(Math.random() * words.length)].word);
         const [wordDef, setWordDef] = useState("");
+        const [wordChoices, setWordChoices] = useState([]);
         // const [userChoice, setUserChoice] = useState("");
         // const [wrongWords, setWrongWords] = useState([]);
 
@@ -94,13 +95,32 @@ function App() {
             });
         };
 
+        // create wordChoices array. need to prevent [word] from being used twice
+        function choicesArray() {
+            // for loop? 
+            // create empty array
+            let wordChoices = [];
+            // add [word]
+            setWordChoices(word);
+            console.log(wordChoices);
+            // bring in words array
+            // remove [word]
+            // run for word1
+            // put into array
+            // run again for word2
+            // put into array
+        };
+        console.log(`Array: ${wordChoices}`);
+
         // onLoad
         useEffect(() => {
             getWordDef();
+            // call wordChoices array
+            choicesArray();
         }, []);
         // [] tells it to run just once
-
         console.log(`Word: ${word}. Def: ${wordDef}`);
+        // console.log(`Word choices: ${wordChoices}`);
 
         
     return (
@@ -123,7 +143,10 @@ function App() {
             <hr />
 
             <div className='wordChoices'>
+                <p>Word Choices:</p>
 
+                <form 
+                />
             </div>
 
         </div>
