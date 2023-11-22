@@ -80,27 +80,22 @@ function App() {
     ];
     // words that reach shortdef endpoint without error
 
-        const [word, setWord] = useState("");
+        const [word] = useState(words[Math.floor(Math.random() * words.length)].word);
         const [wordDef, setWordDef] = useState("");
         // const [userChoice, setUserChoice] = useState("");
         // const [wrongWords, setWrongWords] = useState([]);
-
-        function selectWord() {
-            setWord(words[Math.floor(Math.random() * words.length)].word);
-        };
 
         // API call
         function getWordDef() {
             axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=d083e0a0-8233-44b7-9989-11db737afbd4`)
             .then(res => {
-                // console.log(res.data[0].shortdef);
-                setWordDef(res.data[0].shortdef);
+                // console.log(res.data[0].shortdef[0]);
+                setWordDef(res.data[0].shortdef[0]);
             });
         };
 
         // onLoad
         useEffect(() => {
-            selectWord();
             getWordDef();
         }, []);
         // [] tells it to run just once
