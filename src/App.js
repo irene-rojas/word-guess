@@ -148,6 +148,7 @@ function App() {
             {word: "board", id: 66},
             {word: "candid", id: 67}
         ]);
+        console.log(words);
         const [wordDetails] = useState(words[Math.floor(Math.random() * words.length)]);
         const word = wordDetails.word;
         const wordId = wordDetails.id;
@@ -173,14 +174,13 @@ function App() {
             // add [word]
             setWordChoices(word);
             // remove [word] from words
-            let wrongWords = words.filter((word) => word.length > 5);
+
+            // console.log(updatedArray);
             // run for word1
             // put into array
             // run again for word2
             // put into array
         };
-        console.log(`Array: ${wordChoices}`);
-        console.log(wrongWords);
 
 
         // onLoad
@@ -192,6 +192,7 @@ function App() {
         }, []);
         // [] tells it to run just once
         console.log(`Word: ${word}. ID: ${wordId}. Def: ${wordDef}`);
+        console.log(`Array: ${wordChoices}`);
 
 
 
