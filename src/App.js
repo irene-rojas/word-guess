@@ -99,20 +99,25 @@ function App() {
 
         // create wordChoices array. need to prevent [word] from being used twice
         function choicesArray() {
-            // for loop? 
-            // create empty array
-            // let wordChoices = [];
-            // add [word]
-            setWordChoices(word);
-            // remove [word] from words
+
+            wordChoices.push(word);
             let updatedArray1 = words.filter((_,index) => index !== wordId);
-            console.log(updatedArray1);
             setWordsArray(updatedArray1);
-            // console.log(updatedArray);
-            // run for word1
+            // console.log(updatedArray1);
+            // run for wrong1
+            let wrong1 = updatedArray1[Math.floor(Math.random() * updatedArray1.length)];
+            console.log(`Wrong1: ${wrong1.word}`);
             // put into array
+            wordChoices.push(wrong1.word);
+            console.log(wordChoices);
             // run again for word2
+            let updatedArray2 = words.filter((_,index) => index !== wordId && index !== wrong1.id);
+            // console.log(updatedArray2);
             // put into array
+            let wrong2 = updatedArray2[Math.floor(Math.random() * updatedArray1.length)];
+            console.log(`Wrong2: ${wrong2.word}`);
+            wordChoices.push(wrong2.word);
+            // how scramble words each time it loads?
         };
 
 
@@ -125,7 +130,7 @@ function App() {
         }, []);
         // [] tells it to run just once
         console.log(`Word: ${word}. ID: ${wordId}. Def: ${wordDef}`);
-        console.log(`Array: ${wordChoices}`);
+        console.log(`wordChoices: ${wordChoices}`);
 
 
 
