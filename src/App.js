@@ -80,37 +80,39 @@ function App() {
 //     ];
 
         const [words, setWordsArray] = useState([
-            {word: "baggage", id: 1}, 
-            {word: "fan", id: 2}, 
-            {word: "charge", id: 3}, 
-            {word: "computer", id: 4}, 
-            {word: "monitor", id: 5}, 
-            {word: "keyboard", id: 6}, 
-            {word: "news", id: 7}, 
-            {word: "space", id: 8}, 
-            {word: "fare", id: 9}, 
-            {word: "camera", id: 10}, 
-            {word: "cable", id: 11}, 
-            {word: "boarder", id: 12}, 
-            {word: "dog", id: 13}, 
-            {word: "robot", id: 14}, 
-            {word: "comma", id: 15}, 
-            {word: "mug", id: 16}, 
-            {word: "bow", id: 17}, 
-            {word: "arow", id: 18}, 
-            {word: "row", id: 19}, 
-            {word: "arrow", id: 20}, 
-            {word: "screen", id: 21}, 
-            {word: "sound", id: 22}, 
-            {word: "mail", id: 23}, 
-            {word: "stop", id: 24}, 
-            {word: "travel", id: 25}, 
-            {word: "program", id: 26}, 
-            {word: "light", id: 27}, 
-            {word: "remote", id: 28}, 
-            {word: "contact", id: 29}, 
-            {word: "adventure", id: 30}, 
-            {word: "journey", id: 31}, 
+            {word: "baggage", id: 0}, 
+            {word: "fan", id: 1}, 
+            {word: "charge", id: 2}, 
+            {word: "computer", id: 3}, 
+            {word: "monitor", id: 4}, 
+            {word: "keyboard", id: 5}, 
+            {word: "news", id: 6}, 
+            {word: "space", id: 7}, 
+            {word: "fare", id: 8}, 
+            {word: "camera", id: 9}, 
+            {word: "cable", id: 10}, 
+            {word: "boarder", id: 11}, 
+            {word: "dog", id: 12}, 
+            {word: "robot", id: 13}, 
+            {word: "comma", id: 14}, 
+            {word: "mug", id: 15}, 
+            {word: "bow", id: 16}, 
+            {word: "arow", id: 17}, 
+            {word: "row", id: 18}, 
+            {word: "arrow", id: 19}, 
+            {word: "screen", id: 20}, 
+            {word: "sound", id: 21}, 
+            {word: "mail", id: 22}, 
+            {word: "stop", id: 23}, 
+            {word: "travel", id: 24}, 
+            {word: "program", id: 25}, 
+            {word: "light", id: 26}, 
+            {word: "remote", id: 27}, 
+            {word: "contact", id: 28}, 
+            {word: "adventure", id: 29}, 
+            {word: "journey", id: 30}, 
+
+
             {word: "passage", id: 32}, 
             {word: "react", id: 33}, 
             {word: "under", id: 34}, 
@@ -148,7 +150,7 @@ function App() {
             {word: "board", id: 66},
             {word: "candid", id: 67}
         ]);
-        console.log(words);
+            // console.log(words);
         const [wordDetails] = useState(words[Math.floor(Math.random() * words.length)]);
         const word = wordDetails.word;
         const wordId = wordDetails.id;
@@ -170,11 +172,13 @@ function App() {
         function choicesArray() {
             // for loop? 
             // create empty array
-            let wordChoices = [];
+            // let wordChoices = [];
             // add [word]
             setWordChoices(word);
             // remove [word] from words
-
+            let updatedArray = words.filter((_,index) => index !== wordId);
+            console.log(updatedArray);
+            setWordsArray(updatedArray);
             // console.log(updatedArray);
             // run for word1
             // put into array
