@@ -84,9 +84,8 @@ function App() {
         const word = wordDetails.word;
         const wordId = wordDetails.id;
         const [wordDef, setWordDef] = useState("");
-        const [wordChoices, setWordChoices] = useState([]);
+        const [wordChoices] = useState([]);
         // const [userChoice, setUserChoice] = useState("");
-        const [wrongWords, setWrongWords] = useState([]);
 
         // API call
         function getWordDef() {
@@ -99,25 +98,26 @@ function App() {
 
         // create wordChoices array. need to prevent [word] from being used twice
         function choicesArray() {
-
+            // add word to wordChoices array
             wordChoices.push(word);
+            // create array without word
             let updatedArray1 = words.filter((_,index) => index !== wordId);
             setWordsArray(updatedArray1);
             // console.log(updatedArray1);
             // run for wrong1
             let wrong1 = updatedArray1[Math.floor(Math.random() * updatedArray1.length)];
-            console.log(`Wrong1: ${wrong1.word}`);
+            // console.log(`Wrong1: ${wrong1.word}`);
             // put into array
             wordChoices.push(wrong1.word);
-            console.log(wordChoices);
-            // run again for word2
+            // create new array without word and wrong 1
             let updatedArray2 = words.filter((_,index) => index !== wordId && index !== wrong1.id);
             // console.log(updatedArray2);
-            // put into array
+            // run again for wrong2
             let wrong2 = updatedArray2[Math.floor(Math.random() * updatedArray1.length)];
-            console.log(`Wrong2: ${wrong2.word}`);
+            // console.log(`Wrong2: ${wrong2.word}`);
+            // put into array
             wordChoices.push(wrong2.word);
-            // how scramble words each time it loads?
+            // how scramble word order each time it loads?
         };
 
 
