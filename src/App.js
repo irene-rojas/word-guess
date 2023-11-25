@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-// import Right from "./Right/Right";
+import Form from "./components/Form/Form";
+import Right from "./components/Right/Right";
 // import Wrong from "./Wrong/Wrong";
 // import mwLogo from "./mwlogo.png";
 
@@ -74,42 +75,39 @@ const words = [
 ];
 
 function App() {
-
-
+    const [wordChoices, setWordChoices] = useState([]);
     const [wordDef, setWordDef] = useState("");
+    const [userChoice, setUserChoice] = useState("");
+    const [result, setResult] = useState(null);
+    const [randomWord, setRandomWord] = useState("");
+    const [showRightComponent, setShowRightComponent] = useState(false);
+    const [isDataReady, setIsDataReady] = useState(false);
 
-    function shuffleArray(words, setWordDef) {
-        const shuffledWords = [...words]; // Create a copy to avoid modifying the original array
+    function shuffleArray(words) {
+        const shuffledWords = [...words];
         for (let i = shuffledWords.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffledWords[i], shuffledWords[j]] = [shuffledWords[j], shuffledWords[i]];
         }
 
-        // Log the shuffled array
-        // console.log("Shuffled Array:", shuffledWords);
-
-        // Take the first three elements
         const wordChoices = shuffledWords.slice(0, 3);
+        setWordChoices(wordChoices);
 
-        // Log the randomly selected words
         console.log("Randomly Selected Words:", wordChoices);
 
-        // Randomly select a word from the shuffled array
-        const randomIndex = Math.floor(Math.random() * 3); // Always use the first three elements
+        const randomIndex = Math.floor(Math.random() * 3);
         const randomWord = wordChoices[randomIndex];
 
-        // Log the randomly selected word
         console.log("Randomly Selected Word:", randomWord);
-
-        // Call getWordDef with the randomly selected word
-        getWordDef(randomWord, setWordDef);
 
         return randomWord;
     }
 
-    function getWordDef(randomWord, setWordDef) {
-        axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_API_KEY_MW}`)
-            .then(res => {
+    function getWordDef(randomWord) {
+        setRandomWord(randomWord);
+        axios
+            .get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_API_KEY_MW}`)
+            .then((res) => {
                 if (res.data && res.data.length > 0 && res.data[0].shortdef && res.data[0].shortdef.length > 0) {
                     const definition = res.data[0].shortdef[0];
                     console.log(definition);
@@ -118,51 +116,81 @@ function App() {
                     console.error("Error: Invalid response format");
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Error fetching word definition:", error);
+            })
+            .finally(() => {
+                setIsDataReady(true);
             });
     }
 
-        useEffect(() => {
-            shuffleArray(words, setWordDef);
-        }, []);
+    function handleChange(selectedWord) {
+        setUserChoice(selectedWord);
+        console.log("User choice: ", selectedWord);
+    }
 
+    function handleSubmit() {
+        if (userChoice === randomWord) {
+            setResult("Correct!");
+            setShowRightComponent(true);
+        } else {
+            setResult("Incorrect. Try again!");
+        }
+    }
+
+    function handlePlayAgain() {
+        setIsDataReady(false); // Reset data readiness
+        setResult(null);
+        setShowRightComponent(false);
+        setUserChoice("");
+        const randomWord = shuffleArray(words);
+        getWordDef(randomWord);
+    }
+
+    // Fetch data when isDataReady changes
+    useEffect(() => {
+        if (!isDataReady) return;
+        const randomWord = shuffleArray(words);
+        getWordDef(randomWord);
+    }, [isDataReady]);
+
+    useEffect(() => {
+        const randomWord = shuffleArray(words);
+        getWordDef(randomWord);
+    }, []);
 
     return (
-
         <div className="App">
-
-        <div className="header">
-            <h1>What Does It Mean?</h1>
-            <p>Match the word to the definition.<br />
-            Sometimes it's an obsolute usage!</p>
-        </div>
-
-        <div className='gameDiv'>
-
-            <div className='definition'>
-                <p>Definition:<br />
-                {wordDef}</p>
-            </div>
-            
-            <hr />
-
-            <div className='wordChoices'>
-                <p>Word Choices:</p>
-
-                <form 
-                />
+            <div className="header">
+                <h1>What Does It Mean?</h1>
+                <p>Match the word to the definition.<br />Sometimes it's an obsolete usage!</p>
             </div>
 
-        </div>
+            <div className="gameDiv">
+                <div className="definition">
+                    <p>Definition:<br />{wordDef}</p>
+                </div>
 
-        <div className='resultsDiv'>
-            <p>Results will go here.</p>
-        </div>
+                <hr />
 
-    </div>
+                <div className="wordChoices">
+                    <p>Word Choices:</p>
+                    {isDataReady ? (
+                        wordChoices.map((wordChoice, index) => (
+                            <Form key={index} label={wordChoice} value={wordChoice} onClick={handleChange} />
+                        ))
+                    ) : (
+                        <p>Loading...</p>
+                    )}
+                </div>
+                <button onClick={handleSubmit}>Submit</button>
+                <div className="resultsDiv">
+                    <p>{result}</p>
+                    {showRightComponent && <Right value={randomWord} onPlayAgain={handlePlayAgain} />}
+                </div>
+            </div>
+        </div>
     );
-
-    }
+}
 
 export default App;
