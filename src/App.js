@@ -86,50 +86,53 @@ function App() {
         // const [userChoice, setUserChoice] = useState("");
 
         // API call
-        function getWordDef() {
-            axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.REACT_APP_API_KEY_MW}`)
-            .then(res => {
-                // console.log(res.data[0].shortdef[0]);
-                setWordDef(res.data[0].shortdef[0]);
-            });
-        };
+        // function getWordDef() {
+        //     axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.REACT_APP_API_KEY_MW}`)
+        //     .then(res => {
+        //         // console.log(res.data[0].shortdef[0]);
+        //         setWordDef(res.data[0].shortdef[0]);
+        //     });
+        // };
 
-        // create wordChoices array. need to prevent [word] from being used twice
-        function choicesArray() {
-            // add word to wordChoices array
-            wordChoices.push(word);
-            // create array without word
-            let updatedArray1 = words.filter((_,index) => index !== wordId);
-            setWordsArray(updatedArray1);
-            // console.log(updatedArray1);
-            // run for wrong1
-            let wrong1 = updatedArray1[Math.floor(Math.random() * updatedArray1.length)];
-            // console.log(`Wrong1: ${wrong1.word}`);
-            // put into array
-            wordChoices.push(wrong1.word);
-            // create new array without word and wrong 1
-            let updatedArray2 = words.filter((_,index) => index !== wordId && index !== wrong1.id);
-            // console.log(updatedArray2);
-            // run again for wrong2
-            let wrong2 = updatedArray2[Math.floor(Math.random() * updatedArray1.length)];
-            // console.log(`Wrong2: ${wrong2.word}`);
-            // put into array
-            wordChoices.push(wrong2.word);
-            // how scramble word order each time it loads?
-        };
-
+        function shuffleArray(words) {
+            for (let i = words.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [words[i], words[j]] = [words[j], words[i]];
+            }
+        
+            const wordChoices = words.slice(0, 3);
+        
+            // Log the shuffled array
+            console.log("Shuffled Array:", wordChoices);
+        
+            // Randomly select a word from the shuffled array
+            const randomIndex = Math.floor(Math.random() * wordChoices.length);
+            const randomWord = wordChoices[randomIndex];
+        
+            // Log the randomly selected word
+            console.log("Randomly Selected Word:", randomWord);
+        
+            // Call getWordDef inside the axios .then block
+            // axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_API_KEY_MW}`)
+            //     .then(res => {
+            //         console.log(res.data[0].shortdef[0]);
+            //         setWordDef(res.data[0].shortdef[0]);
+            //     });
+        
+            return randomWord;
+        }
+        
+        // Rest of your code
+        
+        // Assuming 'words' is defined somewhere in your code
+        const shuffledWord = shuffleArray(words);
+        
 
         // onLoad
         useEffect(() => {
-            // getWord();
-            getWordDef();
-            // call wordChoices array
-            choicesArray();
+
         }, []);
         // [] tells it to run just once
-        console.log(`Word: ${word}. ID: ${wordId}. Def: ${wordDef}`);
-        console.log(`wordChoices: ${wordChoices}`);
-
 
 
         
