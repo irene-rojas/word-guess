@@ -78,6 +78,7 @@ function App() {
 
     const [wordChoices, setWordChoices] = useState([]);
     const [wordDef, setWordDef] = useState("");
+    const [userChoice, setUserChoice] = useState("");
 
     function shuffleArray(words, setWordDef) {
         const shuffledWords = [...words]; // Create a copy to avoid modifying the original array
@@ -126,6 +127,11 @@ function App() {
             });
     };
 
+    function handleChange(selectedWord) {
+        setUserChoice(selectedWord);
+        console.log("User choice: ", selectedWord);
+    }
+        
         useEffect(() => {
             shuffleArray(words, setWordDef);
         }, []);
@@ -154,12 +160,12 @@ function App() {
                 <p>Word Choices:</p>
 
                 {wordChoices.map((wordChoice, index) => {
-                    // console.log(wordChoice);
                     return (
                         <Form 
                             key={index}
                             label={wordChoice}
                             value={wordChoice}
+                            onClick={handleChange}
                         />
                     )
                 })}
@@ -169,6 +175,7 @@ function App() {
 
         <div className='resultsDiv'>
             <p>Results will go here.</p>
+            {/* if userChoice === randomWord, present Right component. if userChoice !=== randomWord, present Wrong */}
         </div>
 
     </div>
