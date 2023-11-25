@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import Form from "./components/Form/Form";
 // import Right from "./Right/Right";
 // import Wrong from "./Wrong/Wrong";
 // import mwLogo from "./mwlogo.png";
@@ -75,7 +76,7 @@ const words = [
 
 function App() {
 
-
+    const [wordChoices, setWordChoices] = useState([]);
     const [wordDef, setWordDef] = useState("");
 
     function shuffleArray(words, setWordDef) {
@@ -90,6 +91,7 @@ function App() {
 
         // Take the first three elements
         const wordChoices = shuffledWords.slice(0, 3);
+        setWordChoices(wordChoices);
 
         // Log the randomly selected words
         console.log("Randomly Selected Words:", wordChoices);
@@ -105,7 +107,8 @@ function App() {
         getWordDef(randomWord, setWordDef);
 
         return randomWord;
-    }
+    };
+
 
     function getWordDef(randomWord, setWordDef) {
         axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_API_KEY_MW}`)
@@ -150,8 +153,15 @@ function App() {
             <div className='wordChoices'>
                 <p>Word Choices:</p>
 
-                <form 
-                />
+                {wordChoices.map((wordChoice, index) => {
+                    return (
+                        <Form 
+                            key={index}
+                            label={wordChoice}
+                            
+                        />
+                    )
+                })}
             </div>
 
         </div>
