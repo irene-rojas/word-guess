@@ -8,9 +8,9 @@ const Form = (props) => {
             {/* <input type="radio" label={props.label}/>
             {props.label} */}
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                <label class="form-check-label" for="flexRadioDefault1">
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value={props.wordChoice}/>
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
                     {props.label}
                 </label>
             </div>

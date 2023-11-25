@@ -124,7 +124,7 @@ function App() {
             .catch(error => {
                 console.error("Error fetching word definition:", error);
             });
-    }
+    };
 
         useEffect(() => {
             shuffleArray(words, setWordDef);
@@ -154,11 +154,12 @@ function App() {
                 <p>Word Choices:</p>
 
                 {wordChoices.map((wordChoice, index) => {
+                    // console.log(wordChoice);
                     return (
                         <Form 
                             key={index}
                             label={wordChoice}
-                            
+                            value={wordChoice}
                         />
                     )
                 })}
