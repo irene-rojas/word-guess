@@ -5,137 +5,131 @@ import axios from 'axios';
 // import Wrong from "./Wrong/Wrong";
 // import mwLogo from "./mwlogo.png";
 
+const words = [
+    "baggage",
+    "fan", 
+    "charge", 
+    "computer", 
+    "monitor", 
+    "keyboard", 
+    "news", 
+    "space", 
+    "fare", 
+    "camera", 
+    "cable", 
+    "boarder", 
+    "dog", 
+    "robot", 
+    "comma", 
+    "mug", 
+    "bow", 
+    "arow", 
+    "row", 
+    "arrow", 
+    "screen", 
+    "sound", 
+    "mail", 
+    "stop", 
+    "travel", 
+    "program", 
+    "light", 
+    "remote", 
+    "contact", 
+    "adventure", 
+    "journey", 
+    "passage", 
+    "react", 
+    "under", 
+    "tire", 
+    "support", 
+    "brave", 
+    "report", 
+    "attain", 
+    "achieve", 
+    "respond", 
+    "attach", 
+    "quirk", 
+    "expect", 
+    "await", 
+    "stay", 
+    "room", 
+    "space", 
+    "period", 
+    "ranged", 
+    "incline", 
+    "recline", 
+    "fade", 
+    "lose", 
+    "accord", 
+    "render", 
+    "supply", 
+    "win", 
+    "property", 
+    "forth", 
+    "shatter", 
+    "interest", 
+    "ring", 
+    "chain", 
+    "content", 
+    "board",
+    "candid"
+];
 
 function App() {
 
-        const [words, setWordsArray] = useState([
-            "baggage",
-            "fan", 
-            "charge", 
-            "computer", 
-            "monitor", 
-            "keyboard", 
-            "news", 
-            "space", 
-            "fare", 
-            "camera", 
-            "cable", 
-            "boarder", 
-            "dog", 
-            "robot", 
-            "comma", 
-            "mug", 
-            "bow", 
-            "arow", 
-            "row", 
-            "arrow", 
-            "screen", 
-            "sound", 
-            "mail", 
-            "stop", 
-            "travel", 
-            "program", 
-            "light", 
-            "remote", 
-            "contact", 
-            "adventure", 
-            "journey", 
-            "passage", 
-            "react", 
-            "under", 
-            "tire", 
-            "support", 
-            "brave", 
-            "report", 
-            "attain", 
-            "achieve", 
-            "respond", 
-            "attach", 
-            "quirk", 
-            "expect", 
-            "await", 
-            "stay", 
-            "room", 
-            "space", 
-            "period", 
-            "ranged", 
-            "incline", 
-            "recline", 
-            "fade", 
-            "lose", 
-            "accord", 
-            "render", 
-            "supply", 
-            "win", 
-            "property", 
-            "forth", 
-            "shatter", 
-            "interest", 
-            "ring", 
-            "chain", 
-            "content", 
-            "board",
-            "candid"
-        ]);
-            // console.log(words);
-        const [wordDetails] = useState(words[Math.floor(Math.random() * words.length)]);
-        const word = wordDetails.word;
-        const wordId = wordDetails.id;
-        const [wordDef, setWordDef] = useState("");
-        const [wordChoices] = useState([]);
-        // const [userChoice, setUserChoice] = useState("");
 
-        // API call
-        // function getWordDef() {
-        //     axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${process.env.REACT_APP_API_KEY_MW}`)
-        //     .then(res => {
-        //         // console.log(res.data[0].shortdef[0]);
-        //         setWordDef(res.data[0].shortdef[0]);
-        //     });
-        // };
+    const [wordDef, setWordDef] = useState("");
 
-        function shuffleArray(words) {
-            for (let i = words.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [words[i], words[j]] = [words[j], words[i]];
-            }
-        
-            const wordChoices = words.slice(0, 3);
-        
-            // Log the shuffled array
-            console.log("Shuffled Array:", wordChoices);
-        
-            // Randomly select a word from the shuffled array
-            const randomIndex = Math.floor(Math.random() * wordChoices.length);
-            const randomWord = wordChoices[randomIndex];
-        
-            // Log the randomly selected word
-            console.log("Randomly Selected Word:", randomWord);
-        
-            // Call getWordDef inside the axios .then block
-            // axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_API_KEY_MW}`)
-            //     .then(res => {
-            //         console.log(res.data[0].shortdef[0]);
-            //         setWordDef(res.data[0].shortdef[0]);
-            //     });
-        
-            return randomWord;
+    function shuffleArray(words, setWordDef) {
+        const shuffledWords = [...words]; // Create a copy to avoid modifying the original array
+        for (let i = shuffledWords.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledWords[i], shuffledWords[j]] = [shuffledWords[j], shuffledWords[i]];
         }
-        
-        // Rest of your code
-        
-        // Assuming 'words' is defined somewhere in your code
-        const shuffledWord = shuffleArray(words);
-        
 
-        // onLoad
+        // Log the shuffled array
+        // console.log("Shuffled Array:", shuffledWords);
+
+        // Take the first three elements
+        const wordChoices = shuffledWords.slice(0, 3);
+
+        // Log the randomly selected words
+        console.log("Randomly Selected Words:", wordChoices);
+
+        // Randomly select a word from the shuffled array
+        const randomIndex = Math.floor(Math.random() * 3); // Always use the first three elements
+        const randomWord = wordChoices[randomIndex];
+
+        // Log the randomly selected word
+        console.log("Randomly Selected Word:", randomWord);
+
+        // Call getWordDef with the randomly selected word
+        getWordDef(randomWord, setWordDef);
+
+        return randomWord;
+    }
+
+    function getWordDef(randomWord, setWordDef) {
+        axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${process.env.REACT_APP_API_KEY_MW}`)
+            .then(res => {
+                if (res.data && res.data.length > 0 && res.data[0].shortdef && res.data[0].shortdef.length > 0) {
+                    const definition = res.data[0].shortdef[0];
+                    console.log(definition);
+                    setWordDef(definition);
+                } else {
+                    console.error("Error: Invalid response format");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching word definition:", error);
+            });
+    }
+
         useEffect(() => {
-
+            shuffleArray(words, setWordDef);
         }, []);
-        // [] tells it to run just once
 
 
-        
     return (
 
         <div className="App">
