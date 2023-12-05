@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "95520dd2f98ac7842a91",
+    "revision": "4b65e62fa6b4c4f0ef95",
     "url": "/word-guess/static/css/main.a4b73e1f.chunk.css"
   },
   {
-    "revision": "95520dd2f98ac7842a91",
-    "url": "/word-guess/static/js/main.95520dd2.chunk.js"
+    "revision": "4b65e62fa6b4c4f0ef95",
+    "url": "/word-guess/static/js/main.4b65e62f.chunk.js"
   },
   {
     "revision": "58143a1efd389ec49989",
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/word-guess/static/media/mwlogo.765f6060.png"
   },
   {
-    "revision": "5d0d7ea9ad43d4ae695a57928272fe15",
+    "revision": "e97e7d9889cc96bc94aa8e1096a50ff8",
     "url": "/word-guess/index.html"
   }
 ];

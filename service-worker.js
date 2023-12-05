@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/word-guess/precache-manifest.3dca6e0cd70da7208c8a7cf136ce210d.js"
+  "/word-guess/precache-manifest.bcb687b822adcc680075a856f17291c9.js"
 );
 
 workbox.clientsClaim();
