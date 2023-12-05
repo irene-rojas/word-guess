@@ -2,6 +2,10 @@ body {
     margin: 0 auto;
 }
 
+.mwLogo {
+    height: 25px;
+}
+
 /* mobile */
 /* .App {
     margin: 0 auto;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Form from "./components/Form/Form";
 import Right from "./components/Right/Right";
 // import Wrong from "./Wrong/Wrong";
-// import mwLogo from "./mwlogo.png";
+import mwLogo from "./mwlogo.png";
 
 const words = [
     "accord",
@@ -188,6 +188,7 @@ function App() {
                     <p>{result}</p>
                     {showRightComponent && <Right value={randomWord} onPlayAgain={handlePlayAgain} />}
                 </div>
+                <p>Powered by Merriam-Webster <a href="https://dictionaryapi.com/" target="_blank"><img className="mwLogo" src={mwLogo} alt="Merriam-Webster Logo" /></a></p>
             </div>
         </div>
     );
